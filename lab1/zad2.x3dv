@@ -1,0 +1,14 @@
+#X3D V3.3 utf8
+
+Transform {
+    children Shape{
+        geometry Sphere{
+            radius 3
+        }
+    } 
+}
+
+
+
+
+    

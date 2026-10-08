@@ -1,0 +1,38 @@
+Transform {
+    children [
+        DEF Step Shape {
+            appearance Appearance { 
+                material Material { 
+                    emissiveColor 0.2 0.5 0.2 
+                    transparency 0 
+                    specularColor 0 0.1 0 
+                } 
+            } 
+            geometry Box {
+                size 5 2 2
+            }
+        }
+    ]
+}
+
+Transform {
+translation 0 2 2
+children [ USE Step ]
+}
+Transform {
+translation 0 4 4
+children [ USE Step ]
+}
+Transform {
+translation 0 6 6
+children [ USE Step ]
+}
+Transform {
+translation 0 8 8
+children [ USE Step ]
+}
+Transform {
+translation 0 10 10
+children [ USE Step ]
+}
+
