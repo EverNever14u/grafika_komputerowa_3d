@@ -1,0 +1,516 @@
+#X3D V3.3 utf8
+
+#Sun
+
+DEF Sun Transform { 
+    translation 0 0 0
+    rotation 0 0 0 0
+    children [ 
+        Shape { 
+            appearance Appearance { 
+                material Material { 
+                    diffuseColor 1 1 1
+                }
+                texture ImageTexture { 
+                    url "sun.jpg" 
+                }  
+            } 
+            geometry Sphere {
+                radius 9
+            } 
+        } 
+    ] 
+} 
+
+DEF SunTime TimeSensor {
+    loop TRUE
+    cycleInterval 3.125
+}
+
+DEF SunRotationIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+    
+} 
+
+ROUTE SunTime.fraction_changed TO SunRotationIter.set_fraction
+ROUTE SunRotationIter.value_changed TO Sun.set_rotation
+
+
+#earth
+DEF EarthOuter Transform { 
+    translation 30 0 0 
+    center -30 0 0
+    rotation 0 0 0 0
+
+
+    children [ 
+
+        DEF EarthInner Transform {
+        rotation 0 0 0 0
+
+        children [Shape { 
+            appearance Appearance { 
+                material Material { 
+                    diffuseColor 1 1 1 
+                } 
+     
+                texture ImageTexture { 
+                    url "2k_earth_daymap.jpg" 
+                } 
+            
+            } 
+            geometry Sphere {
+                radius 3
+            } 
+        } ]
+        }
+ 
+        
+    ] 
+}
+
+
+DEF EarthOuterTime TimeSensor { 
+    loop TRUE
+    cycleInterval 46
+}
+
+DEF EarthOuterIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+
+ROUTE EarthOuterTime.fraction_changed TO EarthOuterIter.set_fraction
+ROUTE EarthOuterIter.value_changed TO EarthOuter.set_rotation
+
+
+DEF EarthInnerTime TimeSensor { 
+    loop TRUE
+    cycleInterval 0.125
+}
+
+DEF EarthInnerIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+ROUTE EarthInnerTime.fraction_changed TO EarthInnerIter.set_fraction
+
+ROUTE EarthInnerIter.value_changed TO EarthInner.set_rotation
+
+
+
+
+#mercury
+DEF MercuryOuter Transform { 
+    translation 10 0 0 
+    center -10 0 0
+    rotation 0 0 0 0
+
+
+    children [ 
+
+        DEF MercuryInner Transform {
+        rotation 0 0 0 0
+
+        children [Shape { 
+            appearance Appearance { 
+                material Material { 
+                    diffuseColor 1 1 1 
+                } 
+     
+                texture ImageTexture { 
+                    url "2k_mercury.jpg" 
+                } 
+            
+            } 
+            geometry Sphere {
+                radius 1
+            } 
+        } ]
+        }
+ 
+        
+    ] 
+}
+
+
+DEF MercuryOuterTime TimeSensor { 
+    loop TRUE
+    cycleInterval 10
+}
+
+DEF MercuryOuterIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+
+ROUTE MercuryOuterTime.fraction_changed TO MercuryOuterIter.set_fraction
+ROUTE MercuryOuterIter.value_changed TO MercuryOuter.set_rotation
+
+
+DEF MercuryInnerTime TimeSensor { 
+    loop TRUE
+    cycleInterval 22
+}
+
+DEF MercuryInnerIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+ROUTE MercuryInnerTime.fraction_changed TO MercuryInnerIter.set_fraction
+
+ROUTE MercuryInnerIter.value_changed TO MercuryInner.set_rotation
+
+
+#venus 
+DEF VenusOuter Transform {
+    translation 22 0 0
+    center -22 0 0
+    rotation 0 0 0 0
+
+    children [
+
+        DEF VenusInner Transform {
+        rotation 0 0 0 0
+
+        children [Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 1 1 1
+                }
+
+                texture ImageTexture {
+                    url "2k_venus_atmosphere.jpg"
+                }
+
+            }
+            geometry Sphere {
+                radius 2.5
+            }
+        } ]
+        }
+
+    ]
+}
+
+DEF VenusOuterTime TimeSensor {
+    loop TRUE
+    cycleInterval 28
+}
+
+DEF VenusOuterIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+
+ROUTE VenusOuterTime.fraction_changed TO VenusOuterIter.set_fraction
+ROUTE VenusOuterIter.value_changed TO VenusOuter.set_rotation
+
+DEF VenusInnerTime TimeSensor {
+    loop TRUE
+    cycleInterval 30
+}
+
+DEF VenusInnerIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+ROUTE VenusInnerTime.fraction_changed TO VenusInnerIter.set_fraction
+
+ROUTE VenusInnerIter.value_changed TO VenusInner.set_rotation
+
+
+#mars
+
+DEF MarsOuter Transform {
+    translation 45 0 0
+    center -45 0 0
+    rotation 0 0 0 0
+
+    children [
+
+        DEF MarsInner Transform {
+        rotation 0 0 0 0
+
+        children [Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 1 1 1
+                }
+
+                texture ImageTexture {
+                    url "2k_mars.jpg"
+                }
+
+            }
+            geometry Sphere {
+                radius 2.5
+            }
+        } ]
+        }
+
+    ]
+}
+
+DEF MarsOuterTime TimeSensor {
+    loop TRUE
+    cycleInterval 85
+}
+
+DEF MarsOuterIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+
+ROUTE MarsOuterTime.fraction_changed TO MarsOuterIter.set_fraction
+ROUTE MarsOuterIter.value_changed TO MarsOuter.set_rotation
+
+DEF MarsInnerTime TimeSensor {
+    loop TRUE
+    cycleInterval 0.12
+}
+
+DEF MarsInnerIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+ROUTE MarsInnerTime.fraction_changed TO MarsInnerIter.set_fraction
+
+ROUTE MarsInnerIter.value_changed TO MarsInner.set_rotation
+
+
+#jupiter
+
+DEF JupiterOuter Transform {
+    translation 78 0 0
+    center -78 0 0
+    rotation 0 0 0 0
+
+    children [
+
+        DEF JupiterInner Transform {
+        rotation 0 0 0 0
+
+        children [Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 1 1 1
+                }
+
+                texture ImageTexture {
+                    url "2k_jupiter.jpg"
+                }
+
+            }
+            geometry Sphere {
+                radius 7
+            }
+        } ]
+        }
+
+    ]
+}
+
+DEF JupiterOuterTime TimeSensor {
+    loop TRUE
+    cycleInterval 501
+}
+
+DEF JupiterOuterIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+
+ROUTE JupiterOuterTime.fraction_changed TO JupiterOuterIter.set_fraction
+ROUTE JupiterOuterIter.value_changed TO JupiterOuter.set_rotation
+
+DEF JupiterInnerTime TimeSensor {
+    loop TRUE
+    cycleInterval 0.0625
+}
+
+DEF JupiterInnerIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+ROUTE JupiterInnerTime.fraction_changed TO JupiterInnerIter.set_fraction
+
+ROUTE JupiterInnerIter.value_changed TO JupiterInner.set_rotation
+
+
+
+
+#saturn
+DEF SaturnOuter Transform {
+    translation 100 0 0
+    center -100 0 0
+    rotation 0 0 0 0
+
+    children [
+
+        DEF SaturnInner Transform {
+        rotation 0 0 0 0
+
+        children [Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 1 1 1
+                }
+
+                texture ImageTexture {
+                    url "2k_saturn.jpg"
+                }
+
+            }
+            geometry Sphere {
+                radius 6
+            }
+        } ]
+        }
+
+    ]
+}
+
+DEF SaturnOuterTime TimeSensor {
+    loop TRUE
+    cycleInterval 1368
+}
+
+DEF SaturnOuterIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+
+ROUTE SaturnOuterTime.fraction_changed TO SaturnOuterIter.set_fraction
+ROUTE SaturnOuterIter.value_changed TO SaturnOuter.set_rotation
+
+DEF SaturnInnerTime TimeSensor {
+    loop TRUE
+    cycleInterval  0.0625
+}
+
+DEF SaturnInnerIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+ROUTE SaturnInnerTime.fraction_changed TO SaturnInnerIter.set_fraction
+
+ROUTE SaturnInnerIter.value_changed TO SaturnInner.set_rotation
+
+
+
+### Uran
+DEF UranusOuter Transform {
+    translation 150 0 0
+    center -150 0 0
+    rotation 0 0 0 0
+
+    children [
+
+        DEF UranusInner Transform {
+        rotation 0 0 0 0
+
+        children [Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 1 1 1
+                }
+
+                texture ImageTexture {
+                    url "2k_uranus.jpg"
+                }
+
+            }
+            geometry Sphere {
+                radius 5
+            }
+        } ]
+        }
+
+    ]
+}
+
+DEF UranusOuterTime TimeSensor {
+    loop TRUE
+    cycleInterval 3832
+}
+
+DEF UranusOuterIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+
+ROUTE UranusOuterTime.fraction_changed TO UranusOuterIter.set_fraction
+ROUTE UranusOuterIter.value_changed TO UranusOuter.set_rotation
+
+DEF UranusInnerTime TimeSensor {
+    loop TRUE
+    cycleInterval 0.1
+}
+
+DEF UranusInnerIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+ROUTE UranusInnerTime.fraction_changed TO UranusInnerIter.set_fraction
+
+ROUTE UranusInnerIter.value_changed TO UranusInner.set_rotation
+
+
+### Neptun
+DEF NeptuneOuter Transform {
+    translation 200 0 0
+    center -200 0 0
+    rotation 0 0 0 0
+
+    children [
+
+        DEF NeptuneInner Transform {
+        rotation 0 0 0 0
+
+        children [Shape {
+            appearance Appearance {
+                material Material {
+                    diffuseColor 1 1 1
+                }
+
+                texture ImageTexture {
+                    url "2k_neptune.jpg"
+                }
+
+            }
+            geometry Sphere {
+                radius 5
+            }
+        } ]
+        }
+
+    ]
+}
+
+DEF NeptuneOuterTime TimeSensor {
+    loop TRUE
+    cycleInterval 7482
+}
+
+DEF NeptuneOuterIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+
+ROUTE NeptuneOuterTime.fraction_changed TO NeptuneOuterIter.set_fraction
+ROUTE NeptuneOuterIter.value_changed TO NeptuneOuter.set_rotation
+
+DEF NeptuneInnerTime TimeSensor {
+    loop TRUE
+    cycleInterval 0.1
+}
+
+DEF NeptuneInnerIter OrientationInterpolator {
+    key [0,0.5, 1]
+    keyValue [0 0 1 0,0 0 1 3.14, 0 0 1 6.28]
+}
+ROUTE NeptuneInnerTime.fraction_changed TO NeptuneInnerIter.set_fraction
+
+ROUTE NeptuneInnerIter.value_changed TO NeptuneInner.set_rotation

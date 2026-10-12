@@ -1,0 +1,129 @@
+#X3D V3.3 utf8
+
+
+
+Transform {
+    children Shape {
+        geometry Box { size 50 50 1 }
+        appearance Appearance {
+            material Material {
+                emissiveColor 0.08 0.2 0.1
+                diffuseColor 0.1 0.25 0.12
+            }
+        }
+    }
+}
+
+
+Transform {
+    children [
+        Switch {
+            whichChoice -1
+            children [
+                DEF Wall Shape {
+                    appearance Appearance { 
+                        material Material { 
+                            emissiveColor 0.8 0.2 0.2 
+                            specularColor 0 0.1 0 
+                            diffuseColor 0.1 0.1 0.1
+                        } 
+                    } 
+                    geometry Box {
+                        size 2 2 2
+                    }
+                }
+            ]
+        }
+    ]
+}
+
+
+DEF Door Transform {
+    translation 18 20 2
+    children Shape {
+        geometry Box { size 3.2 0.8 3 }
+        appearance Appearance {
+            material Material {
+                emissiveColor 0.1 0.1 0.2
+                diffuseColor 0.1 0.1 0.25
+            }
+
+        }
+    }
+}
+
+#otwarcie drzwi
+
+DEF DoorTime TimeSensor {
+    loop FALSE
+    cycleInterval 2
+}
+
+DEF DoorIter PositionInterpolator{
+    key [0, 1]
+    keyValue [18 20 2, 18 20 -0.99]
+}
+
+DEF StartSensor ProximitySensor {
+    center 0 0 0
+    size 1000 1000 1000
+}
+
+ROUTE StartSensor.enterTime TO DoorTime.set_startTime
+ROUTE DoorTime.fraction_changed TO DoorIter.set_fraction
+ROUTE DoorIter.value_changed TO Door.set_translation
+
+#labirynt
+
+# Ściany poziome 
+Transform { translation 2 -20 2 scale 18.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation -14 -16 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation -6 -16 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation 14 -16 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation -18 -12 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation 4 -12 2 scale 12.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation -10 -8 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation 10 -8 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation -6 -4 2 scale 10.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation 12 -4 2 scale 4.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation -14 0 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation 6 0 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation -18 4 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation -10 4 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation 0 4 2 scale 4.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation 12 4 2 scale 4.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation -12 8 2 scale 4.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation 12 8 2 scale 4.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation -8 12 2 scale 4.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation 8 12 2 scale 4.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation 18 12 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation -6 16 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation 4 16 2 scale 4.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation 14 16 2 scale 2.4 0.4 1.5 children [ USE Wall ] }
+Transform { translation -2 20 2 scale 18.4 0.4 1.5 children [ USE Wall ] }
+
+# Ściany pionowe
+Transform { translation -20 0 2 scale 0.4 20.4 1.5 children [ USE Wall ] }
+Transform { translation -16 -18 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation -16 -8 2 scale 0.4 4.4 1.5 children [ USE Wall ] }
+Transform { translation -16 12 2 scale 0.4 4.4 1.5 children [ USE Wall ] }
+Transform { translation -12 -12 2 scale 0.4 4.4 1.5 children [ USE Wall ] }
+Transform { translation -12 4 2 scale 0.4 4.4 1.5 children [ USE Wall ] }
+Transform { translation -12 14 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation -8 -10 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation -4 -14 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation -4 -4 2 scale 0.4 4.4 1.5 children [ USE Wall ] }
+Transform { translation -4 10 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation 0 -18 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation 0 -10 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation 0 2 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation 0 10 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation 4 -4 2 scale 0.4 4.4 1.5 children [ USE Wall ] }
+Transform { translation 4 10 2 scale 0.4 6.4 1.5 children [ USE Wall ] }
+Transform { translation 8 -18 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation 8 2 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation 12 -2 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation 12 18 2 scale 0.4 2.4 1.5 children [ USE Wall ] }
+Transform { translation 16 -8 2 scale 0.4 4.4 1.5 children [ USE Wall ] }
+Transform { translation 16 4 2 scale 0.4 4.4 1.5 children [ USE Wall ] }
+Transform { translation 20 0 2 scale 0.4 20.4 1.5 children [ USE Wall ] }
